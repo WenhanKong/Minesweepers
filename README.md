@@ -3,5 +3,5 @@
 ### [Github Wiki Pages](https://wenhankong.github.io/Minesweepers/)
 ## Team Members
 ### [Wenhan Kong]
-### [Tianhao Hu]
+### [Haotian Hu]
 ### [Lixiong Feng]
