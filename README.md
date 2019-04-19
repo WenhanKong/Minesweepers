@@ -2,6 +2,6 @@
 ## Team Minesweepers
 ### [Github Wiki Pages](https://wenhankong.github.io/Minesweepers/)
 ## Team Members
-### [Wenhan Kong]
-### [Haotian Hu]
-### [Lixiong Feng]
+### [Wenhan Kong](wenhank@uci.edu)
+### [Haotian Hu](haotiah1@uci.edu)
+### [Lixiong Feng](lxiongf@uci.edu)
