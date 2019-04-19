@@ -8,7 +8,7 @@ title:  Proposal
 Our project explores the challenges associated with designing a Minesweeper solving algorithm in Minecraft. It considers how to start a game for more a advancing situation, to modify various heuristics for handling guesses, and to make deterministic deductions with different strategies.   
   
 <p align="center">
-<img src="https://github.com/WenhanKong/Project50/blob/master/docs/images/minesweep_board.png" width="250">  
+<img src="https://github.com/WenhanKong/Minesweepers/blob/master/docs/images/minesweep_board.png" width="250">  
 </p>  
 
 Above is a typical minesweeping gameboard. Playing the Minesweeper requires a fair amount of logic. When a player tries to uncover every square that does not contain a mine, it is a clever move to use the numbered square to deduce the location of mines.
