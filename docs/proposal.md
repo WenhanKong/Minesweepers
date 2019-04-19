@@ -26,7 +26,7 @@ We are using Contraint Satisfaction Problem Model with Backtracking for our proj
 We are using three metrics to test how well our AI agent perform in Minesweeper:
 + the testing accuracy
 + the average percentage of board uncovered
-+ the winning rate
++ the winning rate  
 The baseline is brute force computation with random guessing. In terms of winning rate, We expect that our approach can achieve 70% win rate which is much higher than the rate of baseline. 
 
 In qualitative analysis, having multiple games allows for computing the average winning rate as well as the standtard deviation. We beleive that the win ratio is the most straightforward measurement for determining how good our approach is. The expected number of guesses is also essential to consider, since it often relates to the time and space usage. We may use matplot to visualize relationships between metrics. 
