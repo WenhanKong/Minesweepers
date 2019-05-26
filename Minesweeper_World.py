@@ -32,7 +32,7 @@ if __name__ == '__main__':
     malmoutils.parse_command_line(agent_host_player)
 
 # -- set up the game -- #
-    game = Minesweeper_Game.Minesweeper(10, 5)
+    game = Minesweeper_Game.Minesweeper(10, 10)
     player = Minesweeper_Agent.Player(agent_host_player, game.size)
     judge = Minesweeper_Agent.Judge(agent_host_judge, game.size)
     #game.play()
@@ -110,36 +110,42 @@ if __name__ == '__main__':
     Minesweeper_Utils.safeStartMission(agent_host_judge, my_mission, client_pool, my_mission_record, 1, '' )
     Minesweeper_Utils.safeWaitForStart([agent_host_player, agent_host_judge])    
 
-    world_state = agent_host_judge.getWorldState()
-    # perform a few actions
+    print("======================================================")
+
     while game.end == False:
+    
+        # -- player get world state and random choose a position to sweep -- #
+        world_state = agent_host_judge.getWorldState()
+        msg = world_state.observations[-1].text
+        observations = json.loads(msg)
+        grid = observations.get(u'board', 0)
+        bottom_layer = grid[:len(grid)//2]
+        top_layer = grid[len(grid)//2:]
+        
+        player.observe(top_layer)
+        player_x, player_z = player.choose_random()
+        time.sleep(0.5)
+
+        # -- game backend reads player's position and run search function and update game.board -- #
+        game.sweep(player_x-1, player_z-1)
+        game.printBoard()
+
+        # -- judge gets updated world state -- #
+        world_state = agent_host_judge.getWorldState()
         msg = world_state.observations[-1].text
         observations = json.loads(msg)
         grid = observations.get(u'board', 0)
         bottom_layer = grid[:len(grid)//2]
         top_layer = grid[len(grid)//2:]
 
-        player.observe(top_layer)
-        player_x, player_z = player.choose_random()
-        time.sleep(0.5)
-
-        game.sweep(player_x, player_z)
-
         judge.observe(top_layer)
         judge.updateBoardStatus(game.board)
+        print("======================================")
 
-    # wait for the missions to end    
+    # -- wait for the missions to end -- #
     while agent_host_player.peekWorldState().is_mission_running or agent_host_judge.peekWorldState().is_mission_running:
         time.sleep(1)
         world_state = agent_host_judge.getWorldState()
-
-        #if world_state.number_of_observations_since_last_state > 0:
-
-    
-
-    #Minesweeper_Agent.teleport(agent_host_player, 6, 229, 6)
-    #Minesweeper_Agent.act(agent_host_player, player_x, 229, player_z)
-
             
     for error in world_state.errors:
         print("Error:",error.text)
