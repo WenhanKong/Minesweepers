@@ -19,6 +19,7 @@ class Tile(object):
         self.mine = False
         self.visible = False
         self.counter = 0
+        self.marked_as_mine = False
 
 class Minesweeper(object):
 
@@ -44,69 +45,39 @@ class Minesweeper(object):
                     for (dx, dy) in self.directions:
                         if self.inbounds(row+dx, col+dy)==True and self.board[row+dx][col+dy].mine == True:
                             self.board[row][col].counter+=1
-    
+
     def drawBoard(self):
-        res = ''
-        #different color maps to counter in Tile Class.
-        counter_color_dict = {1:'ORANGE', 2:'MAGENTA', 3:'LIGHT_BLUE', 4:'YELLOW', 5:'LIME', 6:'PINK', 7:'RED', 8:'BLACK'}
-        
-        #generate a diamond block fence with size of self.size * self.size
-        res+=genFence(self.size, "diamond_block")
-        for z in range(self.size):
-            for x in range(self.size):
-                if self.board[z][x].mine == True:
-                    res+=genBlock(x+1,227,z+1,"tnt")
-                    res+="\n"
-                else:
-                    #tiles with no mines nearby are default wool
-                    if self.board[z][x].counter == 0:
-                        res+=genBlock(x+1,227,z+1,"wool")
-                    else:
-                        res+=genBlockWithColor(x+1, 227, z+1, "wool", counter_color_dict[self.board[z][x].counter])
-                    res+="\n"
-        #generate a glass cuboid as cover, not using genFence because layer starts at (1,1)
-        res+='<DrawCuboid x1="1" y1="228" z1="1" x2="'+str(self.size)+'" y2="228" z2="'+str(self.size)+'" type="glass"/>'
-        return res
-    
-    def drawBoard2(self):
         res = ''
         # -- different color maps to counter in Tile Class. -- #
         counter_color_dict = {1:'ORANGE', 2:'MAGENTA', 3:'LIGHT_BLUE', 4:'YELLOW', 5:'LIME', 6:'PINK', 7:'RED', 8:'BLACK'}
         
         # -- generate a diamond block fence with size of self.size * self.size -- #
         res+=genFence(self.size, "diamond_block")
-        for z in range(self.size):
-            for x in range(self.size):
-                if self.board[z][x].mine == True:
+        for x in range(self.size):
+            for z in range(self.size):
+                if self.board[x][z].mine == True:
                     res+=genBlock(x+1,227,z+1,"tnt")
                     res+="\n"
                 else:
                     #tiles with no mines nearby are default wool
-                    if self.board[z][x].counter == 0:
+                    if self.board[x][z].counter == 0:
                         res+=genBlock(x+1,227,z+1,"wool")
                     else:
-                        res+=genBlockWithColor(x+1, 227, z+1, "wool", counter_color_dict[self.board[z][x].counter])
+                        res+=genBlockWithColor(x+1, 227, z+1, "wool", counter_color_dict[self.board[x][z].counter])
                     res+="\n"
                 # -- generate a glass cuboid as cover, not using genFence because layer starts at (1,1) -- #
-                if not self.board[z][x].visible:
+                if not self.board[x][z].visible:
                     res+=genBlock(x+1, 228, z+1, "glass")
+                else:
+                    res+=genBlock(x+1, 228, z+1, 'air')
         return res
-
-    def play(self):
-        self.printFullBoard()
-        game_state = True
-        while(game_state):
-            game_state = self.sweep(int(input("Enter x:")), int(input("Enter y:")))
-            self.printBoard()
 
     def sweep(self, row, col):
         if(self.board[row][col].mine):
             print('This Tile Is A Mine! You Lost!')
             self.end = True
-            return False
         else:
             self.search(row, col)
-            return True
 
     def search(self, row, col):
         #check if the coord is inbound
@@ -132,6 +103,31 @@ class Minesweeper(object):
         else:
             return False
 
+    def drawBoardAfterEnd(self):
+        res = ''
+        # -- different color maps to counter in Tile Class. -- #
+        counter_color_dict = {1:'ORANGE', 2:'MAGENTA', 3:'LIGHT_BLUE', 4:'YELLOW', 5:'LIME', 6:'PINK', 7:'RED', 8:'BLACK'}
+        
+        # -- generate a diamond block fence with size of self.size * self.size -- #
+        res+=genFence(self.size, "diamond_block")
+        for z in range(self.size):
+            for x in range(self.size):
+                if self.board[z][x].mine == True:
+                    res+=genBlock(x+1,227,z+1,"tnt")
+                    res+="\n"
+                else:
+                    #tiles with no mines nearby are default wool
+                    if self.board[z][x].counter == 0:
+                        res+=genBlock(x+1,227,z+1,"wool")
+                    else:
+                        res+=genBlockWithColor(x+1, 227, z+1, "wool", counter_color_dict[self.board[z][x].counter])
+                    res+="\n"
+                # -- remove all cover -- #
+                res+=genBlock(x+1, 228, z+1, 'air')
+                
+        return res
+
+# -- For Debug -- #
     def printBoard(self):
         res = []
         for row in self.board:
@@ -160,6 +156,3 @@ class Minesweeper(object):
             res.append(temp)
         for i in res:
             print(i)
-
-
-

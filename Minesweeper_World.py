@@ -18,137 +18,68 @@ import uuid
 from collections import defaultdict, deque
 from timeit import default_timer as timer
 
+
 if __name__ == '__main__':
 
-# -- set up mission agent -- #
-#   agent = MinesweeperAgent()
+    # -- set up mission agent -- #
     agent_host_player = MalmoPython.AgentHost()
-    agent_host_judge = MalmoPython.AgentHost()
-
-
-# Use agent_host1 for parsing the command-line options.
-# (This is why agent_host1 is passed in to all the subsequent malmoutils calls, even for
-# agent 2's setup.)
-    malmoutils.parse_command_line(agent_host_player)
-
-# -- set up the game -- #
-    game = Minesweeper_Game.Minesweeper(10, 10)
-    player = Minesweeper_Agent.Player(agent_host_player, game.size)
-    judge = Minesweeper_Agent.Judge(agent_host_judge, game.size)
-    #game.play()
-
-# -- set up mission XML -- #
-    mission_xml='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-                <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <About>
-                    <Summary>Minesweeper World Gnerator.</Summary>
-                </About>
-  
-                <ServerSection>
-                    <ServerInitialConditions>
-                        <Time><StartTime>1000</StartTime></Time>
-                        <Weather>clear</Weather>
-                    </ServerInitialConditions>
-                    <ServerHandlers>
-                    <FlatWorldGenerator generatorString="3;7,220*1,5*3,2;3;,biome_1"/>
-                    <DrawingDecorator>
-                        '''+game.drawBoard()+'''
-                    </DrawingDecorator>
-                    <ServerQuitFromTimeUp timeLimitMs="100000"/>
-                    <ServerQuitWhenAnyAgentFinishes/>
-                    </ServerHandlers>
-                </ServerSection>
-
-                <AgentSection mode="Survival">
-                    <Name>player</Name>
-                    <AgentStart>
-                        <Placement x="1" y="229" z="1" pitch="0" yaw="0"/>
-                    </AgentStart>
-                    <AgentHandlers>
-                        <ObservationFromGrid>
-                            <Grid name="board" absoluteCoords="1">
-                                <min x="1" y="228" z="1"/>
-                                <max x="10" y="228" z="10"/>
-                            </Grid>
-                        </ObservationFromGrid>
-                        <AbsoluteMovementCommands/>
-                        <ContinuousMovementCommands/>
-                        <AgentQuitFromTouchingBlockType>
-                            <Block type="tnt"/>
-                        </AgentQuitFromTouchingBlockType>
-                    </AgentHandlers>
-                </AgentSection>
-
-                <AgentSection mode="Creative">
-                    <Name>judge</Name>
-                    <AgentStart>
-                        <Placement x="12" y="228" z="12" pitch="+90" yaw="0"/>
-                    </AgentStart>
-                    <AgentHandlers>
-                        <ObservationFromGrid>
-                            <Grid name="board" absoluteCoords="1">
-                                <min x="1" y="227" z="1"/>
-                                <max x="10" y="228" z="10"/>
-                            </Grid>
-                        </ObservationFromGrid>
-                        <DiscreteMovementCommands/>
-                        <AbsoluteMovementCommands/>
-                    </AgentHandlers>
-                </AgentSection>
-                
-                </Mission>
-                '''
-
-    my_mission = MalmoPython.MissionSpec(mission_xml, True)
-    my_mission_record = MalmoPython.MissionRecordSpec()
-
     client_pool = MalmoPython.ClientPool()
     client_pool.add( MalmoPython.ClientInfo('127.0.0.1',10000) )
-    client_pool.add( MalmoPython.ClientInfo('127.0.0.1',10001) )
 
-    Minesweeper_Utils.safeStartMission(agent_host_player, my_mission, client_pool, my_mission_record, 0, '' )
-    Minesweeper_Utils.safeStartMission(agent_host_judge, my_mission, client_pool, my_mission_record, 1, '' )
-    Minesweeper_Utils.safeWaitForStart([agent_host_player, agent_host_judge])    
+    # Use agent_host1 for parsing the command-line options.
+    malmoutils.parse_command_line(agent_host_player)
 
-    print("======================================================")
-
-    while game.end == False:
+    # -- set up the game -- #
+    # Minesweeper(size, num_mines)
+    game = Minesweeper_Game.Minesweeper(10, 2)
+    player = Minesweeper_Agent.Player(agent_host_player, game)
+    stop = game.end
     
-        # -- player get world state and random choose a position to sweep -- #
-        world_state = agent_host_judge.getWorldState()
-        msg = world_state.observations[-1].text
-        observations = json.loads(msg)
-        grid = observations.get(u'board', 0)
-        bottom_layer = grid[:len(grid)//2]
-        top_layer = grid[len(grid)//2:]
+    # -- while the game is not end, keep asking player to randomly choose a tile to sweep and update mission xml for next turn -- #
+    while not game.end:
+        mission_xml = Minesweeper_Utils.getMissionXML(game)
+    
+        my_mission = MalmoPython.MissionSpec(mission_xml, True)
+        my_mission_record = MalmoPython.MissionRecordSpec()
+
+        time.sleep(1)  
+        Minesweeper_Utils.safeStartMission(agent_host_player, my_mission, client_pool, my_mission_record, 0, '' )
+        Minesweeper_Utils.safeWaitForStart([agent_host_player])
+
+        print("========================================================")
+    
+        # -- player get world state -- #
+        world_state = agent_host_player.getWorldState()
+        while not world_state.has_mission_begun:
+            time.sleep(0.1)
+            world_state = agent_host_player.getWorldState()
         
-        player.observe(top_layer)
-        player_x, player_z = player.choose_random()
-        time.sleep(0.5)
+        # -- player random choose a position to sweep -- #
+        if world_state.number_of_observations_since_last_state > 0:
+            msg = world_state.observations[-1].text
+            observations = json.loads(msg)
+            grid = observations.get(u'board', 0)
 
-        # -- game backend reads player's position and run search function and update game.board -- #
-        game.sweep(player_x-1, player_z-1)
-        game.printBoard()
-
-        # -- judge gets updated world state -- #
-        world_state = agent_host_judge.getWorldState()
-        msg = world_state.observations[-1].text
-        observations = json.loads(msg)
-        grid = observations.get(u'board', 0)
-        bottom_layer = grid[:len(grid)//2]
-        top_layer = grid[len(grid)//2:]
-
-        judge.observe(top_layer)
-        judge.updateBoardStatus(game.board)
-        print("======================================")
-
-    # -- wait for the missions to end -- #
-    while agent_host_player.peekWorldState().is_mission_running or agent_host_judge.peekWorldState().is_mission_running:
-        time.sleep(1)
-        world_state = agent_host_judge.getWorldState()
+            # -- randomly choose a tile to sweep and update board status -- #
+            #game.printBoard()
+            # -- if the tile is a mine, game.end will be set to True
+            x,z = player.sweep_random()
+            print(x, z)
+            print("========================================================")
+            #game.printBoard()
             
-    for error in world_state.errors:
-        print("Error:",error.text)
+        for error in world_state.errors:
+            print("Error:",error.text)
 
-    print()
-    print("Mission ended")
+        time.sleep(1)
+        print()
+        print("The round end")
+
+    # -- after the game is end, minecraft shows a complete board status with out cover -- #
+    print("Full Board Stats")
+    mission_xml = Minesweeper_Utils.getMissionXMLAfterEnd(game)
+    my_mission = MalmoPython.MissionSpec(mission_xml, True)
+    my_mission_record = MalmoPython.MissionRecordSpec()
+    time.sleep(5)
+    Minesweeper_Utils.safeStartMission(agent_host_player, my_mission, client_pool, my_mission_record, 0, '' )
+    Minesweeper_Utils.safeWaitForStart([agent_host_player])

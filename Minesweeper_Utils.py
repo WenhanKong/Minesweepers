@@ -57,3 +57,95 @@ def safeWaitForStart(agent_hosts):
         print("Timed out waiting for mission to begin. Bailing.")
         exit(1)
     print("Mission has started.")
+
+def getMissionXML(game):
+    mission_xml='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+                <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <About>
+                    <Summary>Minesweeper World Gnerator.</Summary>
+                </About>
+  
+                <ServerSection>
+                    <ServerInitialConditions>
+                        <Time><StartTime>1000</StartTime></Time>
+                        <Weather>clear</Weather>
+                    </ServerInitialConditions>
+                    <ServerHandlers>
+                        <FlatWorldGenerator generatorString="3;7,220*1,5*3,2;3;,biome_1"/>
+                        <DrawingDecorator>
+                            '''+game.drawBoard()+'''
+                        </DrawingDecorator>
+                        <ServerQuitFromTimeUp timeLimitMs="1000"/>
+                        <ServerQuitWhenAnyAgentFinishes/>
+                    </ServerHandlers>
+                </ServerSection>
+
+                <AgentSection mode="Survival">
+                    <Name>player</Name>
+                    <AgentStart>
+                        <Placement x="1" y="229" z="1" pitch="+90" yaw="0"/>
+                    </AgentStart>
+                    <AgentHandlers>
+                        <ObservationFromGrid>
+                            <Grid name="board" absoluteCoords="1">
+                                <min x="1" y="228" z="1"/>
+                                <max x="10" y="228" z="10"/>
+                            </Grid>
+                        </ObservationFromGrid>
+                        <MissionQuitCommands/>
+                        <AbsoluteMovementCommands/>
+                        <ContinuousMovementCommands/>
+                        <AgentQuitFromTouchingBlockType>
+                            <Block type="tnt"/>
+                        </AgentQuitFromTouchingBlockType>
+                    </AgentHandlers>
+                </AgentSection>
+                </Mission>
+                '''
+    return mission_xml
+
+def getMissionXMLAfterEnd(game):
+    mission_xml='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+            <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <About>
+                <Summary>Minesweeper World Gnerator.</Summary>
+            </About>
+
+            <ServerSection>
+                <ServerInitialConditions>
+                    <Time><StartTime>1000</StartTime></Time>
+                    <Weather>clear</Weather>
+                </ServerInitialConditions>
+                <ServerHandlers>
+                    <FlatWorldGenerator generatorString="3;7,220*1,5*3,2;3;,biome_1"/>
+                    <DrawingDecorator>
+                        '''+game.drawBoardAfterEnd()+'''
+                    </DrawingDecorator>
+                    <ServerQuitFromTimeUp timeLimitMs="100000"/>
+                    <ServerQuitWhenAnyAgentFinishes/>
+                </ServerHandlers>
+            </ServerSection>
+
+            <AgentSection mode="Survival">
+                <Name>player</Name>
+                <AgentStart>
+                    <Placement x="1" y="229" z="1" pitch="+90" yaw="0"/>
+                </AgentStart>
+                <AgentHandlers>
+                    <ObservationFromGrid>
+                        <Grid name="board" absoluteCoords="1">
+                            <min x="1" y="228" z="1"/>
+                            <max x="10" y="228" z="10"/>
+                        </Grid>
+                    </ObservationFromGrid>
+                    <MissionQuitCommands/>
+                    <AbsoluteMovementCommands/>
+                    <ContinuousMovementCommands/>
+                    <AgentQuitFromTouchingBlockType>
+                        <Block type="tnt"/>
+                    </AgentQuitFromTouchingBlockType>
+                </AgentHandlers>
+            </AgentSection>
+            </Mission>
+            '''
+    return mission_xml
