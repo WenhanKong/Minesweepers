@@ -79,6 +79,15 @@ class Minesweeper(object):
         else:
             self.search(row, col)
 
+        non_visible_counter = 0
+        for row in self.board:
+            for tile in row:
+                if not tile.visible:
+                    non_visible_counter+=1
+        if non_visible_counter == self.num_mines:
+            self.end = True
+            print('You Won! You have uncovered all non-mine blocks.')
+
     def search(self, row, col):
         #check if the coord is inbound
         if not self.inbounds(row, col):
