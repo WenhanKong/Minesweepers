@@ -25,7 +25,7 @@ class Minesweeper(object):
 
     directions = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
     win = False
-    
+
     def __init__(self, size, num_mines):
         self.size = size
         self.num_mines = num_mines
@@ -78,12 +78,12 @@ class Minesweeper(object):
 
     def sweep(self, row, col):
         if(self.board[row][col].mine):
-            print('This Tile Is A Mine! You Lost!')
+            #print('This Tile Is A Mine! You Lost!')
             self.end = True
         else:
             self.search(row, col)
 
-        self.checkWinCondition()
+        #self.checkWinCondition()
 
     def checkWinCondition(self):
         self.non_visible_counter = 0
@@ -94,7 +94,7 @@ class Minesweeper(object):
         if self.non_visible_counter == self.num_mines:
             self.end = True
             self.win = True
-            print('You Won! You have uncovered all non-mine blocks.')
+            #print('You Won! You have uncovered all non-mine blocks.')
 
     def search(self, row, col):
         #check if the coord is inbound

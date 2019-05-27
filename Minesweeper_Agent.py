@@ -26,7 +26,7 @@ class Agent(object):
 
     def destroy_block(self, x, y, z):
         time.sleep(0.5)
-        self.teleport_center(x, y, z)
+        self.teleport_center(x, y+1, z)
         time.sleep(0.1)
         self.agent_host.sendCommand('attack 1')
         time.sleep(0.2)
@@ -44,8 +44,6 @@ class Player(Agent):
                 self.board_with_prob[(row, col)] = 0
         #print(self.board_with_prob)
 
-
-    
     def sweep_random(self):
         while True:
             x = random.randint(0, self.size-1)
@@ -53,6 +51,16 @@ class Player(Agent):
             if not self.game.board[x][z].visible:
                 self.destroy_block(x+1, 228, z+1)
                 self.game.sweep(x,z)
+                return (x,z)
+
+    def sweep_naive(self):
+        while True:
+            x, z = self.choose_naive()
+            if not self.game.board[x][z].visible:
+                self.destroy_block(x+1, 228, z+1)
+                time.sleep(1)
+                self.game.sweep(x,z)
+                self.game.checkWinCondition()
                 return (x,z)
 
     # -- naive search surrounding non-visible and legal tiles, calculate each tile's probabilitity as mine, return position with the lowest value-- #
@@ -72,30 +80,33 @@ class Player(Agent):
                                     res[(row+dx, col+dy)] = currentTile.counter/nearby_counter
                                 else:
                                     res[(row+dx, col+dy)]+=currentTile.counter/nearby_counter
-        print(res)
+        #print(res)
         if res.items():
             return min(res.items(), key=operator.itemgetter(1))[0]
         else:
-            print("the dict is empty")
+            #print("the dict is empty")
             return self.choose_random()
 
     # -- for debug -- #
 
-    def play(self):
+    def play(self, choose):
         while not self.game.end:
-            print("=================== Board Before =====================")
-            self.game.printBoard()
+            #print("=================== Board Before =====================")
+            #self.game.printBoard()
             #print(self.board_with_prob)
 
-            (row, col) = self.choose_naive()
-            print(row, col)
+            if choose == 'naive':
+                (row, col) = self.choose_naive()
+            #print(row, col)
+            elif choose == 'random':
+                (row, col) = self.choose_random()
             self.game.sweep(row, col)
 
-            print("=================== Board After =====================")
-            self.game.printBoard()
+            #print("=================== Board After =====================")
+            #self.game.printBoard()
             #print(self.board_with_prob)
 
-        print("++++++++++++++++++++ Game End +++++++++++++++++++++")
+        #print("++++++++++++++++++++ Game End +++++++++++++++++++++")
 
     def choose_random(self):
         while True:

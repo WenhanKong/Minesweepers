@@ -4,7 +4,7 @@ import time
 def safeStartMission(agent_host, mission, client_pool, recording, role, experimentId):
     used_attempts = 0
     max_attempts = 5
-    print("Calling startMission for role", role)
+    #print("Calling startMission for role", role)
     while True:
         try:
             agent_host.startMission(mission, client_pool, recording, role, experimentId)
@@ -33,10 +33,10 @@ def safeStartMission(agent_host, mission, client_pool, recording, role, experime
         if used_attempts == max_attempts:
             print("All chances used up - bailing now.")
             exit(1)
-    print("startMission called okay.")
+    #print("startMission called okay.")
 
 def safeWaitForStart(agent_hosts):
-    print("Waiting for the mission to start", end=' ')
+    #print("Waiting for the mission to start", end=' ')
     start_flags = [False for a in agent_hosts]
     start_time = time.time()
     time_out = 120  # Allow two minutes for mission to start.
@@ -56,9 +56,9 @@ def safeWaitForStart(agent_hosts):
     if time.time() - start_time >= time_out:
         print("Timed out waiting for mission to begin. Bailing.")
         exit(1)
-    print("Mission has started.")
+    #print("Mission has started.")
 
-def getMissionXML(game):
+def getMissionXML(game, x, z):
     mission_xml='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
                 <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <About>
@@ -83,7 +83,7 @@ def getMissionXML(game):
                 <AgentSection mode="Creative">
                     <Name>player</Name>
                     <AgentStart>
-                        <Placement x="1" y="229" z="1" pitch="+90" yaw="0"/>
+                        <Placement x="'''+ str(x+1) + '" y="229" z="' + str(z+1) + '''" pitch="+90" yaw="0"/>
                         <Inventory>
                             <InventoryItem slot="0" type="diamond_pickaxe"/>
                         </Inventory>
