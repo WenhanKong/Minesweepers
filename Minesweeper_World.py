@@ -26,14 +26,13 @@ if __name__ == '__main__':
     client_pool = MalmoPython.ClientPool()
     client_pool.add( MalmoPython.ClientInfo('127.0.0.1',10000) )
 
-    # Use agent_host1 for parsing the command-line options.
+    # Use agent_host_player for parsing the command-line options.
     malmoutils.parse_command_line(agent_host_player)
 
     # -- set up the game -- #
     # Minesweeper(size, num_mines)
-    game = Minesweeper_Game.Minesweeper(10, 2)
+    game = Minesweeper_Game.Minesweeper(10, 5)
     player = Minesweeper_Agent.Player(agent_host_player, game)
-    stop = game.end
     
     # -- while the game is not end, keep asking player to randomly choose a tile to sweep and update mission xml for next turn -- #
     while not game.end:
@@ -48,7 +47,7 @@ if __name__ == '__main__':
 
         print("========================================================")
     
-        # -- player get world state -- #
+        # -- get world state -- #
         world_state = agent_host_player.getWorldState()
         while not world_state.has_mission_begun:
             time.sleep(0.1)
@@ -75,11 +74,11 @@ if __name__ == '__main__':
         print()
         print("The round end")
 
-    # -- after the game is end, minecraft shows a complete board status with out cover -- #
+    # -- after the game is end, minecraft shows a complete board status without cover blocks -- #
     print("Full Board Stats")
     mission_xml = Minesweeper_Utils.getMissionXMLAfterEnd(game)
     my_mission = MalmoPython.MissionSpec(mission_xml, True)
     my_mission_record = MalmoPython.MissionRecordSpec()
-    time.sleep(5)
+    time.sleep(1)
     Minesweeper_Utils.safeStartMission(agent_host_player, my_mission, client_pool, my_mission_record, 0, '' )
-    Minesweeper_Utils.safeWaitForStart([agent_host_player])
+    Minesweeper_Utils.safeWaitForStart([agent_host_player]) 

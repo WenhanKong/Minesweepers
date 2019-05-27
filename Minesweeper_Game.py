@@ -24,11 +24,13 @@ class Tile(object):
 class Minesweeper(object):
 
     directions = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
-
+    win = False
+    
     def __init__(self, size, num_mines):
         self.size = size
         self.num_mines = num_mines
         self.board = [[Tile() for n in range(size)] for n in range(size)]
+        self.non_visible_counter = self.size * self.size
         self.end = False 
 
         for i in range(num_mines):
@@ -67,7 +69,9 @@ class Minesweeper(object):
                     res+="\n"
                 # -- generate a glass cuboid as cover, not using genFence because layer starts at (1,1) -- #
                 if not self.board[x][z].visible:
-                    res+=genBlock(x+1, 228, z+1, "glass")
+                    res+=genBlock(x+1, 228, z+1, 'stone')
+                elif self.board[x][z].marked_as_mine:
+                    res+=genBlock(x+1, 228, z+1, 'galss')
                 else:
                     res+=genBlock(x+1, 228, z+1, 'air')
         return res
@@ -79,13 +83,17 @@ class Minesweeper(object):
         else:
             self.search(row, col)
 
-        non_visible_counter = 0
+        self.checkWinCondition()
+
+    def checkWinCondition(self):
+        self.non_visible_counter = 0
         for row in self.board:
             for tile in row:
                 if not tile.visible:
-                    non_visible_counter+=1
-        if non_visible_counter == self.num_mines:
+                    self.non_visible_counter+=1
+        if self.non_visible_counter == self.num_mines:
             self.end = True
+            self.win = True
             print('You Won! You have uncovered all non-mine blocks.')
 
     def search(self, row, col):
@@ -137,6 +145,7 @@ class Minesweeper(object):
         return res
 
 # -- For Debug -- #
+
     def printBoard(self):
         res = []
         for row in self.board:

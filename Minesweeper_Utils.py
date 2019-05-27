@@ -80,10 +80,13 @@ def getMissionXML(game):
                     </ServerHandlers>
                 </ServerSection>
 
-                <AgentSection mode="Survival">
+                <AgentSection mode="Creative">
                     <Name>player</Name>
                     <AgentStart>
                         <Placement x="1" y="229" z="1" pitch="+90" yaw="0"/>
+                        <Inventory>
+                            <InventoryItem slot="0" type="diamond_pickaxe"/>
+                        </Inventory>
                     </AgentStart>
                     <AgentHandlers>
                         <ObservationFromGrid>
@@ -95,6 +98,7 @@ def getMissionXML(game):
                         <MissionQuitCommands/>
                         <AbsoluteMovementCommands/>
                         <ContinuousMovementCommands/>
+                        <InventoryCommands/>
                         <AgentQuitFromTouchingBlockType>
                             <Block type="tnt"/>
                         </AgentQuitFromTouchingBlockType>
@@ -126,10 +130,10 @@ def getMissionXMLAfterEnd(game):
                 </ServerHandlers>
             </ServerSection>
 
-            <AgentSection mode="Survival">
+            <AgentSection mode="Creative">
                 <Name>player</Name>
                 <AgentStart>
-                    <Placement x="1" y="229" z="1" pitch="+90" yaw="0"/>
+                    <Placement x="''' + str(game.size/2) + '" y="260" z="' + str(game.size/2)+ '''" pitch="+90" yaw="0"/>
                 </AgentStart>
                 <AgentHandlers>
                     <ObservationFromGrid>
