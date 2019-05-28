@@ -9,3 +9,5 @@ The goal of this project is to design and train a Artificial Intelligence Agent 
 Board With Cover             |  Board Without Cover
 :-------------------------:|:-------------------------:
 <img src="images/board_with_cover.png" width="450"/>  |  <img src="images/board_without_cover.png" width="450"/>
+
+
