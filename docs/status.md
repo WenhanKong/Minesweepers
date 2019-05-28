@@ -4,7 +4,7 @@ title:  Status
 ---
 
 ## Project Summary
-The goal of this project is to design and train a Artificial Intelligence Agent that can play the game Minesweeper in Minecraft with higher accuracy. The project will use random search as the baseline algorithm, naive search as the intermediate algorithm and Q-Learning as the advancing algorithm.   
+It's a minesweeper solver! It can solve any board, with any size, and exactly compute every cell's chance of being a mine. It achieves this through advanced combinatorial and probability analysis with artificial intelligence. The project will use random search as the baseline algorithm, naive search as the intermediate algorithm and Q-Learning as the advancing algorithm.   
 
 Board With Cover             |  Board Without Cover
 :-------------------------:|:-------------------------:
