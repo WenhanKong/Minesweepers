@@ -3,7 +3,8 @@ layout: default
 title:  Home
 ---
 
-Source code: https://github.com/WenhanKong/Minesweepers
+Source code: https://github.com/WenhanKong/Minesweepers  
+Video: https://www.youtube.com/watch?v=9oHDoS7__8o
 
 Reports:
 
@@ -14,7 +15,7 @@ Reports:
 
 <p float="left">
   <img src="https://exceptionnotfound.net/content/images/2016/04/minesweeper-intro.png" width="300" />
-  <img src="/docs/images/board_without_cover.png" width="500" height="300"/> 
+  <img src="docs/images/board_without_cover.png" width="500" height="300"/> 
 </p>
 
 
