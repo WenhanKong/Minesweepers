@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-Source code: https://github.com/WenhanKong/Project50
+Source code: https://github.com/WenhanKong/Minesweepers
 
 Reports:
 
