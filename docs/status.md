@@ -69,3 +69,18 @@ This is a standard Q-Learning algorithm form. This function allows the algorithm
 <p align="center"> 
 <img src="https://latex.codecogs.com/png.latex?$&space;\widehat&space;{&space;Q&space;}&space;^&space;{&space;new&space;}&space;(&space;s_t&space;,&space;a_t&space;)&space;\leftarrow&space;(&space;1&space;-&space;\alpha&space;)&space;\cdot&space;\hat&space;{&space;Q&space;}&space;^&space;{&space;old}&space;(&space;s_t&space;,&space;a_t&space;)&space;&plus;&space;\alpha&space;\cdot&space;(&space;r_t&space;)$">
 </p>
+
+By giving reward for choosing a mine tile to be a negative number (for example, -1), and that of choosig a non-mine tile to be a positive numebr(1), we are able to find the tile which is least likely to be a mine with the highest Q value.
+
+```
+while not game over do:
+   s = current state of the board
+   sweep at random location
+   if tile is mine:
+      r = -1
+   else:
+      r = 1
+   end if 
+   Q(s,a) = (1-alpha)*Q(s,a) + alpha(r)
+end while
+```
