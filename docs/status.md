@@ -56,4 +56,16 @@ while not game over do:
    sweep the tile
 end while
 ```
+![pink wool](images/6.png)  **_Q-Learning_**
 
+One approach is to model Minesweeper game as an Markov Decision Process and use a modified version of Q-Learning to discover the best moves for each given board state. After learning the Q values, the algorithm would then use rewards obtained to play the game. 
+
+<p align="center"> 
+<img src="images/Q-Learning_function.png">
+</p>
+
+This is a standard Q-Learning algorithm form. This function allows the algorithm to learn not just about the direct reward of a particular action, but also a particular action is more likely to lead to reward in a long-term. However, while common chess games are more concerned with endgame result, minesweeper is more interested in intermediate reward: whether the tile contains a mine. Therefore, to better approximate this reward, we remove dicount factor and estimate of optimal future value:
+
+<p align="center"> 
+<img src="https://latex.codecogs.com/png.latex?$&space;\widehat&space;{&space;Q&space;}&space;^&space;{&space;new&space;}&space;(&space;s_t&space;,&space;a_t&space;)&space;\leftarrow&space;(&space;1&space;-&space;\alpha&space;)&space;\cdot&space;\hat&space;{&space;Q&space;}&space;^&space;{&space;old}&space;(&space;s_t&space;,&space;a_t&space;)&space;&plus;&space;\alpha&space;\cdot&space;(&space;r_t&space;)$">
+</p>
