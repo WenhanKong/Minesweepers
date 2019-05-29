@@ -16,7 +16,7 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 
 ## Approach
 
-![white_wool](/docs/images/0.png)  **_Random Search_**  
+![white_wool](images/0.png)  **_Random Search_**  
   
 You might realize that this is basically the most stupid way to find solution to the game.  
 Data for random search approach is generated in the following manner. Each tile in the game board is a Tile class. All the tiles are stored in a 2-dimensional list, and their locations, in terms of row and column, are represetned by list index. 
@@ -33,11 +33,15 @@ while not game over do:
 end while
 ```
 
-![orange wool](/docs/images/1.png)  **_Naive Search_**
+![orange wool](images/1.png)  **_Naive Search_**
 
   
 Data for Naive search approach is generated in the following manner. Each tile can be represented as a feature with an integer determined by the tile state in current board. If the tile is uncovered, the corresponding feature is represented by the number of mines to which the square is adjacent. The integer value is stored in _tile_ class as _COUNTER_ attribute. If the tile is uncovered, _COUNTER_ attribute will be set to 0 by default since it does not provide any information. And the _tile_ class also stores whether the tile is visible to the player with an _visible_ value.  
-  
+
+<p align="center"> 
+<img src="https://i.imgur.com/41QOe.png">
+</p>
+
 At each state the game, the naive search stores all tiles that are not visible, but are adjacent to visible tiles in perimeter. Moves are chosen randomly from tiles within the perimeter with some fixed probability, and otherwise just use random search. This method models normal game play where most moves are selected from the perimeter of the current board. However, our algorithms do not flag tiles indicating a mine is present like in real life; they only predict whether a tile is suitable to be a next move. The general greedy algorithm for naive_search is presented below:
 
 ```
