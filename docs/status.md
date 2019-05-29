@@ -16,7 +16,7 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 
 ## Approach
 
-![lime_wool](images/5.png)  **_Random Search_**  
+![lime_wool](images/736.png)  **_Random Search_**  
   
 You might realize that this is basically the most stupid way to find solution to the game.  
 Data for random search approach is generated in the following manner. Each tile in the game board is a Tile class. All the tiles are stored in a 2-dimensional list, and their locations, in terms of row and column, are represetned by list index. 
@@ -99,3 +99,11 @@ Three approaches are tested on two boards with different size and mine density. 
 In next few weeks, we will improve our Q-Learning algorithm, since for now it covers all the moves, which makes the algorithm kind of slow. One solution is to filter out tiles that are visible or are mines. We also plan to develop more models for calculation of probability in naive choose algorithm. In this part, we can use logistic regression as well as an SVM classifier for predicting uncovered tiles. 
 
 We are also improving on evaluation metrics. Win rate is essential but it does not cover all the respects. We will use testing accuracy, which tells how well our classifier models perform, and the average percentage of the board uncovered. We need to plot three metrics because win rate alont can be misleading: Q-Learning algorithm must take consecutive correct predictions to win; but the game logistics provide a scenario that one can click on one tile and clean a very large area. In this situation, the average percentage of the board uncovered might be helpful. 
+
+## Resources Used
+
+see /docs/references  
+
+charts are made in https://www.meta-chart.com  
+block images are provided by https://www.minecraftinfo.com  
+video is made by iMovie and QuickTimePlayer  
