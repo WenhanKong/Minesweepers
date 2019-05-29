@@ -89,7 +89,7 @@ end while
 ## Evaluation
 We use win rate as the most important metric to understand how our approaches perform in playing Minesweeper:
 
-|5x5 5 mines                |  5x5 10 mines             |  10x10 10 mines           |
+|  5x5 5 mines              |  5x5 10 mines             |  10x10 10 mines           |
 |:-------------------------:|:-------------------------:|:-------------------------:|
 |![](images/5*5_5.png)      | ![](images/5*5_10.png)    | ![](images/10*10_10.png)  |
 
