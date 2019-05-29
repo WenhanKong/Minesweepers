@@ -11,7 +11,7 @@ Reports:
 - [Status](status.html)
 - [Final](final.html)
 
-![](https://github.com/TempFeng/Minesweepers/blob/master/docs/images/minesweep_board.png)
+![game board](/docs/images/board_without_cover)
 
 Welcome to the world of minesweepers! It is one of the most classic games of all time, and although I can't find it anymore on my professional gaming computer, oh my I miss the days I played it on those huge heavy old PCs as one of the only games on Windows98 or Windows2000.
 
