@@ -11,7 +11,12 @@ Reports:
 - [Status](status.html)
 - [Final](final.html)
 
-![game board](/docs/images/board_without_cover.png)
+
+<p float="left">
+  <img src="https://exceptionnotfound.net/content/images/2016/04/minesweeper-intro.png" width="300" />
+  <img src="/docs/images/board_without_cover.png" width="500" height="300"/> 
+</p>
+
 
 Welcome to the world of minesweepers! It is one of the most classic games of all time, and although I can't find it anymore on my professional gaming computer, oh my I miss the days I played it on those huge heavy old PCs as one of the only games on Windows98 or Windows2000.
 
