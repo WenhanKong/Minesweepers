@@ -16,7 +16,7 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 
 ## Approach
 
-![white_wool](images/0.png)  **_Random Search_**  
+![lime_wool](images/5.png)  **_Random Search_**  
   
 You might realize that this is basically the most stupid way to find solution to the game.  
 Data for random search approach is generated in the following manner. Each tile in the game board is a Tile class. All the tiles are stored in a 2-dimensional list, and their locations, in terms of row and column, are represetned by list index. 
@@ -84,3 +84,6 @@ while not game over do:
    Q(s,a) = (1-alpha)*Q(s,a) + alpha(r)
 end while
 ```
+
+## Evaluation
+
