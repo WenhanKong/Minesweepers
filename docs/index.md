@@ -13,9 +13,9 @@ Reports:
 - [Final](final.html)
 
 
-<p float="left">
+<p float="center">
   <img src="https://exceptionnotfound.net/content/images/2016/04/minesweeper-intro.png" width="300" />
-  <img src="https://github.com/WenhanKong/Minesweepers/blob/master/docs/images/board_without_cover.png" width="500" height="300"/> 
+  <img src="images/board_without_cover.png" width="550" height="345"/> 
 </p>
 
 
