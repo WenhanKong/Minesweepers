@@ -16,9 +16,9 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 
 
 ### Video
-
-<video src="https://www.youtube.com/watch?v=9oHDoS7__8o" width="320" height="200" controls preload></video>
-
+  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9oHDoS7__8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
 ## Approach
 
 ![lime_wool](images/736.png)  **_Random Search_**  
