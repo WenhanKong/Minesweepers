@@ -15,6 +15,10 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 |<img src="images/board_with_cover.png" width="450"/>  |  <img src="images/board_without_cover.png" width="450"/>|
 
 
+### Video
+
+<video src="https://www.youtube.com/watch?v=9oHDoS7__8o" width="320" height="200" controls preload></video>
+
 ## Approach
 
 ![lime_wool](images/736.png)  **_Random Search_**  
