@@ -13,11 +13,12 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 |   Board With Cover        |  Board Without Cover      |
 |:-------------------------:|:-------------------------:|
 |<img src="images/board_with_cover.png" width="450"/>  |  <img src="images/board_without_cover.png" width="450"/>|
-
-
-### Video
   
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9oHDoS7__8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+#### Video
+  
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/9oHDoS7__8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
   
 ## Approach
 
