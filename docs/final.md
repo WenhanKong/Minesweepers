@@ -125,6 +125,6 @@ While Q-learning shows the best result, it also suffers from its large state spa
 
 see [/docs/references](https://github.com/WenhanKong/Minesweepers/edit/master/docs/references)  
 
-Charts are made in [](https://www.rapidtables.com)  
-Block images are provided by [](https://www.minecraftinfo.com)  
+Charts are made in (https://www.rapidtables.com)  
+Block images are provided by (https://www.minecraftinfo.com)  
 Video is made by iMovie and QuickTimePlayer    
