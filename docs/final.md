@@ -102,7 +102,7 @@ We use win rate as the most important metric to understand how our approaches pe
 </p>
 
 In the 4x4 board with 3 mines, all approaches except random choose exhibit moderate success; the Q-Learning approaches with almost 80% accuracy.
-However, the performance of three approaches drops after the mine density increases. This is reasonable since, when playing Minesweeper, the game will automatically flip any adjcent non-mine tiles. Lower mine density also means fewer chances to make decision. For method like random choose, it is almost impossible for it to consecutively choose correct tiles. 
+However, the performance of three approaches drops after the board size increases. This is reasonable since, when playing Minesweeper, the game will automatically flip any adjcent non-mine tiles. Larger game board also means more chances to make decision. For method like random choose, it is almost impossible for it to consecutively choose correct tiles. 
 As shown above, for a board larger than 5x5, it becomes harder for all approches to have satisfied probability of correct guess. 
 
 ![red_wool](images/7.png)  **_Number of Mines_**
@@ -121,16 +121,10 @@ The result shows that the win rate drops quickly with increasing mine density: a
 While Q-learning shows the best result, it also suffers from its large state space. On a Minesweeper game board, each tile can hold 9 possible values (0-8 for counter, 9 for invisible). Thus the upper bond for total game board configurations is ![](https://latex.codecogs.com/png.latex?9^{mn}). While in reality the true number of possible game configurations is smaller (due to of large number of inconsistent boards), the number still proves that the state space of Q-learning explodes when the board size increases. Also, for the same state visited before, it is possible that mines hide under different tiles, so we must visit a state many times in order to accurately approximate the probability of whether each tile is not a mine. 
 
 
-## Remaining Goals and Challenges
-
-In next few weeks, we will improve our Q-Learning algorithm, since for now it covers all the moves, which makes the algorithm kind of slow. One solution is to filter out tiles that are visible or are mines. We also plan to develop more models for calculation of probability in naive choose algorithm. In this part, we can use logistic regression as well as an SVM classifier for predicting uncovered tiles. 
-
-We are also improving on evaluation metrics. Win rate is essential but it does not cover all the respects. We will use testing accuracy, which tells how well our classifier models perform, and the average percentage of the board uncovered. We need to plot three metrics because win rate alont can be misleading: Q-Learning algorithm must take consecutive correct predictions to win; but the game logistics provide a scenario that one can click on one tile and clean a very large area. In this situation, the average percentage of the board uncovered might be helpful. 
-
 ## References
 
 see [/docs/references](https://github.com/WenhanKong/Minesweepers/edit/master/docs/references)  
 
-Charts are made in [](https://www.meta-chart.com)  
+Charts are made in [](https://www.rapidtables.com)  
 Block images are provided by [](https://www.minecraftinfo.com)  
 Video is made by iMovie and QuickTimePlayer    
