@@ -3,14 +3,14 @@ layout: default
 title:  Team
 ---
 
-# {{ page.title }}
+# {{ Team member }}
 
 
-## USER 1
+## Wenhan Kong
 ***UCI Net ID***: wenhank
 
-## USER 2
+## Haotian Hu
 ***UCI Net ID***: haotiah1
 
-## USER 3
+## Lixiong Feng
 ***UCI Net ID***: lixiongf
