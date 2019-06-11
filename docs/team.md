@@ -3,7 +3,7 @@ layout: default
 title:  Team
 ---
 
-# {{ Team  }}
+# {{ page.title }}
 
 
 ## Wenhan Kong
