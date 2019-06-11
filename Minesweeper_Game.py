@@ -76,6 +76,46 @@ class Minesweeper(object):
                     res+=genBlock(x+1, 228, z+1, 'air')
         return res
 
+    def get_current_state(self):
+        # -- transform current board to state -- #
+        state = [[0 for row in range(self.size)] for col in range(self.size)]
+        for row in range(self.size):
+            for col in range(self.size):
+                currentTile = self.board[row][col]
+                if currentTile.visible:
+                    state[row][col] = currentTile.counter
+                else:
+                    state[row][col] = -1
+        return state
+
+
+    def is_mine(self,action):
+        # -- determine if a move triggers a mine. action = (row, col) -- #
+        row, col = action
+        return self.board[row][col].mine
+
+    '''
+    def peek(self, action):
+        # -- return a new state given action, but not actually change the original game board -- #
+    '''
+
+    def search(self, row, col):
+        #check if the coord is inbound
+        if not self.inbounds(row, col):
+            return
+        #check if the tile is already visible or is it a mine
+        tile = self.board[row][col]
+        if tile.visible:
+            return
+        if tile.mine:
+            return 
+        #reveal a non mine non visible tile, stop if mines in adjacent tiles
+        tile.visible = True
+        if tile.counter > 0:
+            return
+        for (dx, dy) in self.directions:
+            self.search(row+dx, col+dy)
+
     def sweep(self, row, col):
         if(self.board[row][col].mine):
             #print('This Tile Is A Mine! You Lost!')
@@ -95,23 +135,6 @@ class Minesweeper(object):
             self.end = True
             self.win = True
             #print('You Won! You have uncovered all non-mine blocks.')
-
-    def search(self, row, col):
-        #check if the coord is inbound
-        if not self.inbounds(row, col):
-            return
-        #check if the tile is already visible or is it a mine
-        tile = self.board[row][col]
-        if tile.visible:
-            return
-        if tile.mine:
-            return 
-        #reveal a non mine non visible tile, stop if mines in adjacent tiles
-        tile.visible = True
-        if tile.counter > 0:
-            return
-        for (dx, dy) in self.directions:
-            self.search(row+dx, col+dy)
         
 
     def inbounds(self, row, col):

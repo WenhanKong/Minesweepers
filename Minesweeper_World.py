@@ -29,13 +29,13 @@ if __name__ == '__main__':
     # Use agent_host_player for parsing the command-line options.
     malmoutils.parse_command_line(agent_host_player)
     
-    repeats = 10
+    repeats = 1
     win_counter = 0
     for game_counter in range(repeats):
 
         # -- set up the game -- #
         # Minesweeper(size, num_mines)
-        game = Minesweeper_Game.Minesweeper(10, 5)
+        game = Minesweeper_Game.Minesweeper(10, 50)
         player = Minesweeper_Agent.Player(agent_host_player, game)
         # -- starting position --#
         (x, z) = (1,1)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
             round_counter += 1
 
             print("======================= Game {}, Round {} Start =========================".format(game_counter+1,round_counter))
-        
+
             # -- get world state -- #
             world_state = agent_host_player.getWorldState()
             while not world_state.has_mission_begun:
@@ -71,7 +71,7 @@ if __name__ == '__main__':
                 # -- if the tile is a mine, game.end will be set to True
 
                 # -- Determine the sweep algorithm -- #
-                # -- 1.sweep_random() 2.sweep_naive() -- #
+                # -- 1.sweep_random() 2.sweep_naive() 3.sweep_q() -- #
                 x,z = player.sweep_naive()
                 print('Player goes to ({},{})'.format(x, z))
                 #print("========================================================")
@@ -84,7 +84,7 @@ if __name__ == '__main__':
             time.sleep(0.5)
             print()
 
-        '''
+        
         # -- after the game is end, minecraft shows a complete board status without cover blocks -- #
         print("Full Board Stats")
         mission_xml = Minesweeper_Utils.getMissionXMLAfterEnd(game)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         time.sleep(1)
         Minesweeper_Utils.safeStartMission(agent_host_player, my_mission, client_pool, my_mission_record, 0, '' )
         Minesweeper_Utils.safeWaitForStart([agent_host_player]) 
-        '''
+        
 
         if game.win:
             win_counter+=1
