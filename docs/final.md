@@ -92,17 +92,21 @@ end while
 ```
 
 ## Evaluation
+Three approaches are tested on two boards with different size and mine density.
+
+### Win Rate:
 We use win rate as the most important metric to understand how our approaches perform in playing Minesweeper:
 
-<pre>      5x5 5 mines                           5x5 10 mines                   10x10 10 mines         </pre>
-
-<p float="center">
-  <img src="images/5*5_5.png" width="265" />
-  <img src="images/5*5_10.png" width="265" /> 
-  <img src="images/10*10_10.png" width="265" />
+<p align="center">
+  <img src="images/boardsize-winrate.png" width="1000" />
 </p>
 
-Three approaches are tested on two boards with different size and mine density. In the 5x5 board with 5 mines, all approaches exhibit moderate success; the Q-Learning approaches with almost 100% accuracy. However, the performance of three approaches drops after the mine density increases. This is reasonable since, when playing Minesweeper, the game will automatically flip any adjcent non-mine tiles. Lower mine density also means fewer chances to make decision. For method like random choose, it is almost impossible for it to consecutively choose correct tiles. 
+In the 4x4 board with 3 mines, all approaches except random choose exhibit moderate success; the Q-Learning approaches with almost 80% accuracy.
+However, the performance of three approaches drops after the mine density increases. This is reasonable since, when playing Minesweeper, the game will automatically flip any adjcent non-mine tiles. Lower mine density also means fewer chances to make decision. For method like random choose, it is almost impossible for it to consecutively choose correct tiles. 
+As shown above, for a board larger than 5x5, it becomes harder for all approches to have satisfied probability of correct guess. 
+<p align="center">
+  <img src="images/winrate-nummines.png" width="1000" />
+</p>
 
 ## Remaining Goals and Challenges
 
@@ -110,10 +114,10 @@ In next few weeks, we will improve our Q-Learning algorithm, since for now it co
 
 We are also improving on evaluation metrics. Win rate is essential but it does not cover all the respects. We will use testing accuracy, which tells how well our classifier models perform, and the average percentage of the board uncovered. We need to plot three metrics because win rate alont can be misleading: Q-Learning algorithm must take consecutive correct predictions to win; but the game logistics provide a scenario that one can click on one tile and clean a very large area. In this situation, the average percentage of the board uncovered might be helpful. 
 
-## Resources Used
+## References
 
-see /docs/references  
+see [/docs/references](https://github.com/WenhanKong/Minesweepers/edit/master/docs/references)  
 
-charts are made in https://www.meta-chart.com  
-block images are provided by https://www.minecraftinfo.com  
-video is made by iMovie and QuickTimePlayer  
+Charts are made in [](https://www.meta-chart.com)  
+Block images are provided by [](https://www.minecraftinfo.com)  
+Video is made by iMovie and QuickTimePlayer    
