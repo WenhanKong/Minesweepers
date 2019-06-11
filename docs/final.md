@@ -1,7 +1,11 @@
 ---
 layout: default
-title:  Status
+title:  Final Report
 ---
+
+## Video
+  
+<iframe width="1000" height="720" src="https://www.youtube.com/embed/9oHDoS7__8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Project Summary
 It's a minesweeper solver! It can solve any board, with any size, and exactly compute every cell's chance of being a mine. It achieves this through advanced combinatorial and probability analysis with artificial intelligence. The project will use random search as the baseline algorithm, naive search as the intermediate algorithm and Q-Learning as the advancing algorithm.   
@@ -15,12 +19,8 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 |<img src="images/board_with_cover.png" width="450"/>  |  <img src="images/board_without_cover.png" width="450"/>|
   
   
-#### Video
   
-<iframe width="1000" height="720" src="https://www.youtube.com/embed/9oHDoS7__8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  
-  
-## Approach
+## Approaches
 
 ![lime_wool](images/736.png)  **_Random Search_**  
   
