@@ -94,7 +94,7 @@ end while
 ## Evaluation
 Three approaches are tested on two boards with different size and mine density.
 
-### Win Rate:
+![blue wool](images/3.png)  **_Win Rate_**  
 We use win rate as the most important metric to understand how our approaches perform in playing Minesweeper:
 
 <p align="center">
@@ -104,6 +104,8 @@ We use win rate as the most important metric to understand how our approaches pe
 In the 4x4 board with 3 mines, all approaches except random choose exhibit moderate success; the Q-Learning approaches with almost 80% accuracy.
 However, the performance of three approaches drops after the mine density increases. This is reasonable since, when playing Minesweeper, the game will automatically flip any adjcent non-mine tiles. Lower mine density also means fewer chances to make decision. For method like random choose, it is almost impossible for it to consecutively choose correct tiles. 
 As shown above, for a board larger than 5x5, it becomes harder for all approches to have satisfied probability of correct guess. 
+
+![red_wool](images/7.png)  **_Number of Mines_**
 <p align="center">
   <img src="images/winrate-nummines.png" width="1000" />
 </p>
