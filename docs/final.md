@@ -110,6 +110,17 @@ As shown above, for a board larger than 5x5, it becomes harder for all approches
   <img src="images/winrate-nummines.png" width="1000" />
 </p>
 
+The result shows that the win rate drops quickly with increasing mine density: a game with higher mine density is simply harder to win because a board with more mines has far more layouts. Consider a board with size ![](https://latex.codecogs.com/png.latex?n&space;\times&space;n) and p mines in total, where ![](https://latex.codecogs.com/png.latex?p<n^{2}). On this board, the total number of distinct configurations equals to ![](https://latex.codecogs.com/png.latex?\frac&space;{&space;n&space;^&space;{&space;2&space;}&space;!&space;}&space;{&space;p&space;!&space;(&space;n&space;-&space;p&space;)&space;!&space;}). A greater number of possible board configurations means a more chanllenging game because it creates a huge state space that makes every move less certain. 
+
+![yellow_wool](images/4.png) **_Number of Training_**
+
+<p align="center">
+  <img src="images/training-winrate.png" width="1000" />
+</p>
+
+While Q-learning shows the best result, it also suffers from its large state space. On a Minesweeper game board, each tile can hold 9 possible values (0-8 for counter, 9 for invisible). Thus the upper bond for total game board configurations is ![](https://latex.codecogs.com/png.latex?9^{mn}). While in reality the true number of possible game configurations is smaller (due to of large number of inconsistent boards), the number still proves that the state space of Q-learning explodes when the board size increases. Also, for the same state visited before, it is possible that mines hide under different tiles, so we must visit a state many times in order to accurately approximate the probability of whether each tile is not a mine. 
+
+
 ## Remaining Goals and Challenges
 
 In next few weeks, we will improve our Q-Learning algorithm, since for now it covers all the moves, which makes the algorithm kind of slow. One solution is to filter out tiles that are visible or are mines. We also plan to develop more models for calculation of probability in naive choose algorithm. In this part, we can use logistic regression as well as an SVM classifier for predicting uncovered tiles. 
