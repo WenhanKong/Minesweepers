@@ -16,10 +16,10 @@ Just in case you don't know how the game works: Minesweeper is a single-player p
 |   Board With Cover        |  Board Without Cover      |
 |:-------------------------:|:-------------------------:|
 |<img src="images/board_with_cover.png" width="450"/>  |  <img src="images/board_without_cover.png" width="450"/>|
+    
   
-
 The color of block indicates how many mines are nearby.  
-
+  
 |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |![](images/0.png) | ![](images/1.png) | ![](images/2.png) | ![](images/3.png) | ![](images/4.png) | ![](images/5.png) | ![](images/6.png) | ![](images/7.png) | ![](images/8.png) |
