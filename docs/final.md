@@ -4,7 +4,7 @@ title:  Final Report
 ---
 
 ## Video
-<iframe width="800" height="750" src="https://www.youtube.com/embed/9xKekrs3NvA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+<iframe width="1000" height="800" src="https://www.youtube.com/embed/9xKekrs3NvA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
 
 ## Project Summary
 It's a minesweeper solver! It can solve any board, with any size, and exactly compute every cell's chance of being a mine. It achieves this through advanced combinatorial and probability analysis with artificial intelligence. The project will use random search as the baseline algorithm, naive search as the intermediate algorithm and Q-Learning as the advancing algorithm.   
