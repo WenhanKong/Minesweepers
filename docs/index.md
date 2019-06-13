@@ -3,8 +3,8 @@ layout: default
 title:  Home
 ---
 
-Source code: https://github.com/WenhanKong/Minesweepers  
-Video: https://www.youtube.com/watch?v=9xKekrs3NvA
+-[Source code](https://github.com/WenhanKong/Minesweepers/) 
+-[Video](https://www.youtube.com/watch?v=9xKekrs3NvA/)
 
 Reports:
 
