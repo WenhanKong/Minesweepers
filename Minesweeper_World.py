@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
         # -- set up the game -- #
         # Minesweeper(size, num_mines)
-        game = Minesweeper_Game.Minesweeper(10, 50)
+        game = Minesweeper_Game.Minesweeper(5, 5)
         player = Minesweeper_Agent.Player(agent_host_player, game)
         # -- first move, start random--#
         player.sweep_random()
