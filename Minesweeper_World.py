@@ -31,14 +31,19 @@ if __name__ == '__main__':
     
     repeats = 1
     win_counter = 0
+    qlearner = Minesweeper_Agent.Qlearner(agent_host_debug)
+    qlearner.train2(num_simulations=10000000, grid_size=5, reward=1, game_size=5, num_mines=5)
+    qmap = qlearner.get_qmap()
+    
+    
     for game_counter in range(repeats):
 
         # -- set up the game -- #
         # Minesweeper(size, num_mines)
         game = Minesweeper_Game.Minesweeper(10, 50)
         player = Minesweeper_Agent.Player(agent_host_player, game)
-        # -- starting position --#
-        (x, z) = (1,1)
+        # -- first move, start random--#
+        player.sweep_random()
         round_counter = 0
         # -- while the game is not end, keep asking player to randomly choose a tile to sweep and update mission xml for next turn -- #
         while not game.end:
@@ -72,8 +77,13 @@ if __name__ == '__main__':
 
                 # -- Determine the sweep algorithm -- #
                 # -- 1.sweep_random() 2.sweep_naive() 3.sweep_q() -- #
-                x,z = player.sweep_naive()
-                print('Player goes to ({},{})'.format(x, z))
+                current_state = game.get_current_state()
+                frontier = Minesweeper_Agent.get_frontier_by_state(current_state, game.size)
+
+                best_action = Minesweeper_Agent.choose_action_with_highest_Q2(qmap, current_state, frontier)
+                row, col = best_action
+                print('Player goes to ({},{})'.format(row, col))
+                game.sweep(row, col)
                 #print("========================================================")
                 #game.printBoard()
                 
