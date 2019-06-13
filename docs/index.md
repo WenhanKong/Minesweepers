@@ -4,6 +4,7 @@ title:  Home
 ---
 
 -[Source code](https://github.com/WenhanKong/Minesweepers/) 
+<\n>
 -[Video](https://www.youtube.com/watch?v=9xKekrs3NvA/)
 
 Reports:
